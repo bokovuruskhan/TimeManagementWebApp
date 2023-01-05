@@ -1,0 +1,35 @@
+<div th:fragment="dev_view">
+    <div class="container">
+        <div class="row">
+            <div class="row" style="min-height:12rem;">
+                <div class="col-md-6 p-4 shadow">
+                    <div th:each="task : ${tasks}" class="row shadow border border-success p-2 mb-2 rounded">
+                        <div class="col-md-8">
+                            <h5>
+                                Задача #1
+                            </h5>
+                        </div>
+                        <div class="col-auto">
+                            <h6>
+                                20:50
+                            </h6>
+                        </div>
+                        <div class="col-auto">
+                            <h6>
+                                00:23
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-4 shadow">
+                </div>
+            </div>
+            <div class="row" style="min-height:12rem;">
+                <div class="col-md-6 p-4 shadow">
+                </div>
+                <div class="col-md-6 p-4 shadow">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
