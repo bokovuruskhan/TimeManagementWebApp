@@ -15,6 +15,10 @@ public class Task {
     @Column
     private Boolean completed;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sprint_id", nullable = false)
+    private Sprint sprint;
+
     @Column
     private Boolean highPriority;
 
@@ -50,11 +54,19 @@ public class Task {
         this.highPriority = highPriority;
     }
 
-    public Boolean isHighPriority(){
+    public Boolean isHighPriority() {
         return highPriority;
     }
 
-    public Boolean isCompleted(){
+    public Boolean isCompleted() {
         return completed;
+    }
+
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(Sprint sprint) {
+        this.sprint = sprint;
     }
 }
