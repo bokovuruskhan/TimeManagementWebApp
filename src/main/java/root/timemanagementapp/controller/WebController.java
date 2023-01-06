@@ -11,7 +11,6 @@ import root.timemanagementapp.service.TaskService;
 public class WebController {
     @Autowired
     private SprintService sprintService;
-
     @Autowired
     private TaskService taskService;
 

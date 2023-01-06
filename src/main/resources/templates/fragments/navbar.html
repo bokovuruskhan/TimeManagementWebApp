@@ -1,4 +1,22 @@
 <div th:fragment="navbar">
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form onsubmit="addTask();return false" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Новая задача</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" type="text" name="name" placeholder="Задача" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn form-control btn-outline-dark">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <nav class="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
@@ -8,7 +26,9 @@
             <div class="d-flex">
                 <h6 class="navbar-brand shadow rounded p-2" th:text="${activeSprint.getName()}">
                 </h6>
-                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-person-badge"></i></button>
+                <button class="rounded p-2 btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#addTaskModal" type="submit">+Добавить задачу
+                </button>
+                <button class="btn btn-outline-dark ms-2" type="submit"><i class="bi bi-person-badge"></i></button>
                 <button class="btn btn-outline-success ms-2" type="submit"><i class="bi bi-info-square"></i></button>
                 <button class="btn btn-outline-danger ms-2 me-4" type="submit"><i class="bi bi-x-lg"></i></button>
             </div>

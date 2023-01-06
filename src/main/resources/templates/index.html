@@ -17,38 +17,9 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/index.css">
+    <script src="index.js"></script>
 </head>
 <body class="container container-fluid">
-<div class="modal fade" id="add_record_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="add_record_form" action="/records" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Новая запись</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <input class="form-control" type="datetime-local" name="dateTime" placeholder="Дата и время"
-                               required>
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control" type="number" name="latitude" placeholder="Широта" required>
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control" type="number" name="longitude" placeholder="Долгота" required>
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control" type="number" name="temperature" placeholder="Температура" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn form-control btn-success">Добавить</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 <div class="bg-light rounded mt-2 shadow p-4">
     <div th:insert="fragments/navbar :: navbar"></div>
     <div th:insert="fragments/dev_view :: dev_view"></div>
