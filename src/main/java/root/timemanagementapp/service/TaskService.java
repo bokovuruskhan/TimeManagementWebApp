@@ -22,7 +22,7 @@ public class TaskService {
 
     public Task addTask(Task task) throws Exception {
         task.setCompleted(false);
-        task.setHighPriority(false);
+        System.out.println(task.getHighPriority());
         task.setSprint(sprintService.getActiveSprint());
         return taskRepository.save(task);
     }

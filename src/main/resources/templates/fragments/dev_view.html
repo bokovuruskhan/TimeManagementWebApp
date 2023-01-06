@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="row" style="min-height:12rem;">
-                <div class="col-md-6">
+                <div class="col-md-6 overflow-auto" style="max-height:24rem;">
                     <div class="shadow p-4">
                         <div th:each="task : ${highPriorityOpenedTasks}"
                              class="row shadow border border-success p-2 mb-2 rounded task">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 overflow-auto" style="max-height:24rem;">
                     <div class="shadow p-4">
                         <div th:each="task : ${highPriorityCompletedTasks}"
                              class="row shadow border border-success p-2 mb-2 rounded task">
@@ -46,8 +46,6 @@
                                 </h6>
                             </div>
                             <div class="col-auto btn-group task-buttons">
-                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-play"></i></button>
-                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-stop"></i></button>
                                 <button class="btn btn-outline-primary" type="submit"><i class="bi bi-sticky"></i>
                                 </button>
                                 <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash3"></i>
@@ -58,7 +56,7 @@
                 </div>
             </div>
             <div class="row" style="min-height:12rem;">
-                <div class="col-md-6">
+                <div class="col-md-6 overflow-auto" style="max-height:24rem;">
                     <div class="shadow p-4">
                         <div th:each="task : ${lowPriorityOpenedTasks}"
                              class="row shadow border border-success p-2 mb-2 rounded task">
@@ -85,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 overflow-auto" style="max-height:24rem;">
                     <div class="shadow p-4">
                         <div th:each="task : ${lowPriorityCompletedTasks}"
                              class="row shadow border border-success p-2 mb-2 rounded task">
@@ -102,8 +100,6 @@
                                 </h6>
                             </div>
                             <div class="col-auto btn-group task-buttons">
-                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-play"></i></button>
-                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-stop"></i></button>
                                 <button class="btn btn-outline-primary" type="submit"><i class="bi bi-sticky"></i>
                                 </button>
                                 <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash3"></i>

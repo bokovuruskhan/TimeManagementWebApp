@@ -8,7 +8,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input class="form-control" type="text" name="name" placeholder="Задача" required>
+                        <input class="form-control mb-2" type="text" name="name" placeholder="Задача" required>
+                        <select class="form-select form-control" name="highPriority" required>
+                            <option value="true" selected>Высокий приоритет</option>
+                            <option value="false">Низкий приоритет</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn form-control btn-outline-dark">Добавить</button>
