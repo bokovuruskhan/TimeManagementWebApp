@@ -9,9 +9,14 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column
     private String name;
+
+    @Column
+    private Boolean completed;
+
+    @Column
+    private Boolean highPriority;
 
     public Long getId() {
         return id;
@@ -27,5 +32,29 @@ public class Task {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+
+    public Boolean getHighPriority() {
+        return highPriority;
+    }
+
+    public void setHighPriority(Boolean highPriority) {
+        this.highPriority = highPriority;
+    }
+
+    public Boolean isHighPriority(){
+        return highPriority;
+    }
+
+    public Boolean isCompleted(){
+        return completed;
     }
 }
