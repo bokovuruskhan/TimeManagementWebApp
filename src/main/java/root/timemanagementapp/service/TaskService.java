@@ -7,6 +7,7 @@ import root.timemanagementapp.database.repo.TaskRepository;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,9 +22,28 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
+    public Task findTaskById(Long taskId) throws Exception {
+        Optional<Task> optionalTask = taskRepository.findById(taskId);
+        if (optionalTask.isPresent()) {
+            return optionalTask.get();
+        } else {
+            throw new Exception("Not found task by id=" + taskId);
+        }
+    }
+
+    public Boolean deleteTask(Task task) {
+        try {
+            Task taskInDb = findTaskById(task.getId());
+            taskRepository.delete(taskInDb);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public Task addTask(Task task) throws Exception {
         task.setCompleted(false);
-        task.setElapsedTime(LocalTime.of(0,0));
+        task.setElapsedTime(LocalTime.of(0, 0));
         task.setSprint(sprintService.getActiveSprint());
         return taskRepository.save(task);
     }

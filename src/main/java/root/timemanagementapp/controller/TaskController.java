@@ -19,6 +19,11 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
+    @DeleteMapping
+    public Boolean delete(@RequestBody Task task) {
+        return taskService.deleteTask(task);
+    }
+
     @PostMapping
     public Task create(@RequestBody Task task) throws Exception {
         return taskService.addTask(task);
