@@ -12,8 +12,11 @@ public class WebController {
     private TaskService taskService;
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("tasks", taskService.getAllTasks());
+    public String index(Model model) throws Exception {
+        model.addAttribute("lowPriorityCompletedTasks", taskService.getActiveSprintLowPriorityCompletedTasks());
+        model.addAttribute("highPriorityCompletedTasks", taskService.getActiveSprintHighPriorityCompletedTasks());
+        model.addAttribute("lowPriorityOpenedTasks", taskService.getActiveSprintLowPriorityOpenedTasks());
+        model.addAttribute("highPriorityOpenedTasks", taskService.getActiveSprintHighPriorityOpenedTasks());
         return "index";
     }
 

@@ -28,19 +28,19 @@ public class TaskService {
         return sprintService.getActiveSprint().getTasks().stream().filter(Task-> !Task.isCompleted()).collect(Collectors.toList());
     }
 
-    public List<Task> getCurrentSprintHighPriorityCompletedTasks() throws Exception {
+    public List<Task> getActiveSprintHighPriorityCompletedTasks() throws Exception {
         return getActiveSprintCompletedTasks().stream().filter(Task::isHighPriority).collect(Collectors.toList());
     }
 
-    public List<Task> getCurrentSprintHighPriorityOpenedTasks() throws Exception {
+    public List<Task> getActiveSprintHighPriorityOpenedTasks() throws Exception {
         return getActiveSprintOpenedTasks().stream().filter(Task::isHighPriority).collect(Collectors.toList());
     }
 
-    public List<Task> getCurrentSprintLowPriorityCompletedTasks() throws Exception {
+    public List<Task> getActiveSprintLowPriorityCompletedTasks() throws Exception {
         return getActiveSprintCompletedTasks().stream().filter(Task->!Task.isHighPriority()).collect(Collectors.toList());
     }
 
-    public List<Task> getCurrentSprintLowPriorityOpenedTasks() throws Exception {
+    public List<Task> getActiveSprintLowPriorityOpenedTasks() throws Exception {
         return getActiveSprintOpenedTasks().stream().filter(Task->!Task.isHighPriority()).collect(Collectors.toList());
     }
 
