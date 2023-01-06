@@ -22,6 +22,16 @@ public class Task {
     @Column
     private Boolean highPriority;
 
+    public Task() {
+    }
+
+    public Task(String name, Sprint sprint) {
+        this.name = name;
+        this.completed = false;
+        this.sprint = sprint;
+        this.highPriority = false;
+    }
+
     public Long getId() {
         return id;
     }
