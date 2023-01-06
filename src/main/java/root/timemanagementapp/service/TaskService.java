@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import root.timemanagementapp.database.model.Task;
 import root.timemanagementapp.database.repo.TaskRepository;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ public class TaskService {
 
     public Task addTask(Task task) throws Exception {
         task.setCompleted(false);
-        System.out.println(task.getHighPriority());
+        task.setElapsedTime(LocalTime.of(0,0));
         task.setSprint(sprintService.getActiveSprint());
         return taskRepository.save(task);
     }

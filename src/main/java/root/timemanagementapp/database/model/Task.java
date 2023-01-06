@@ -3,6 +3,8 @@ package root.timemanagementapp.database.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalTime;
+
 @Entity
 @Table
 public class Task {
@@ -15,6 +17,12 @@ public class Task {
 
     @Column
     private Boolean completed;
+
+    @Column
+    private LocalTime estimatedTime;
+
+    @Column
+    private LocalTime elapsedTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sprint_id", nullable = false)
@@ -80,5 +88,21 @@ public class Task {
 
     public void setSprint(Sprint sprint) {
         this.sprint = sprint;
+    }
+
+    public LocalTime getEstimatedTime() {
+        return estimatedTime;
+    }
+
+    public void setEstimatedTime(LocalTime estimatedTime) {
+        this.estimatedTime = estimatedTime;
+    }
+
+    public LocalTime getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(LocalTime elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 }
