@@ -1,5 +1,6 @@
 package root.timemanagementapp.database.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +18,7 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sprint_id", nullable = false)
+    @JsonIgnore
     private Sprint sprint;
 
     @Column

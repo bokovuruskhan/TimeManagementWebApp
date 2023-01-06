@@ -6,8 +6,15 @@ function post(url,jsonData) {
     var json = JSON.stringify(jsonData);
     xhr.open("POST", url, true)
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhr.onreadystatechange = refreshPage();
-    xhr.send();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        const status = xhr.status;
+        if (status === 0 || (status >= 200 && status < 400)) {
+          refreshPage();
+        }
+      }
+    };
+    xhr.send(json);
 };
 
 function addTask(){
