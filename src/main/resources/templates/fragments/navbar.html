@@ -6,8 +6,10 @@
                 Тайм-менеджмент
             </a>
             <div class="d-flex">
+                <h6 class="navbar-brand shadow rounded p-2" th:text="${activeSprint.getName()}">
+                </h6>
                 <button class="btn btn-outline-dark" type="submit"><i class="bi bi-person-badge"></i></button>
-                <button class="btn btn-outline-success ms-2 " type="submit"><i class="bi bi-info-square"></i></button>
+                <button class="btn btn-outline-success ms-2" type="submit"><i class="bi bi-info-square"></i></button>
                 <button class="btn btn-outline-danger ms-2 me-4" type="submit"><i class="bi bi-x-lg"></i></button>
             </div>
         </div>
