@@ -2,77 +2,113 @@
     <div class="container">
         <div class="row">
             <div class="row" style="min-height:12rem;">
-                <div class="col-md-6 p-4 shadow">
-                    <div th:each="task : ${highPriorityOpenedTasks}" class="row shadow border border-success p-2 mb-2 rounded">
-                        <div class="col-md-8">
-                            <h5 th:text="${task.getName()}">
-                            </h5>
-                        </div>
-                        <div class="col-auto">
-                            <h6>
-                                20:50
-                            </h6>
-                        </div>
-                        <div class="col-auto">
-                            <h6>
-                                00:23
-                            </h6>
+                <div class="col-md-6">
+                    <div class="shadow p-4">
+                        <div th:each="task : ${highPriorityOpenedTasks}"
+                             class="row shadow border border-success p-2 mb-2 rounded task">
+                            <div class="col-md-8">
+                                <h5 th:text="${task.getName()}">
+                                </h5>
+                            </div>
+                            <div class="col-auto d-flex">
+                                <h6>
+                                    20:50
+                                </h6>
+                                <h6>
+                                    00:23
+                                </h6>
+                            </div>
+                            <div class="col-auto btn-group task-buttons">
+                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-play"></i></button>
+                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-stop"></i></button>
+                                <button class="btn btn-outline-primary" type="submit"><i class="bi bi-sticky"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash3"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 p-4 shadow">
-                    <div th:each="task : ${highPriorityCompletedTasks}" class="row shadow border border-success p-2 mb-2 rounded">
-                        <div class="col-md-8">
-                            <h5 th:text="${task.getName()}">
-                            </h5>
-                        </div>
-                        <div class="col-auto">
-                            <h6>
-                                20:50
-                            </h6>
-                        </div>
-                        <div class="col-auto">
-                            <h6>
-                                00:23
-                            </h6>
+                <div class="col-md-6">
+                    <div class="shadow p-4">
+                        <div th:each="task : ${highPriorityCompletedTasks}"
+                             class="row shadow border border-success p-2 mb-2 rounded task">
+                            <div class="col-md-8">
+                                <h5 th:text="${task.getName()}">
+                                </h5>
+                            </div>
+                            <div class="col-auto d-flex">
+                                <h6>
+                                    20:50
+                                </h6>
+                                <h6>
+                                    00:23
+                                </h6>
+                            </div>
+                            <div class="col-auto btn-group task-buttons">
+                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-play"></i></button>
+                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-stop"></i></button>
+                                <button class="btn btn-outline-primary" type="submit"><i class="bi bi-sticky"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash3"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row" style="min-height:12rem;">
-                <div class="col-md-6 p-4 shadow">
-                    <div th:each="task : ${lowPriorityOpenedTasks}" class="row shadow border border-success p-2 mb-2 rounded">
-                        <div class="col-md-8">
-                            <h5 th:text="${task.getName()}">
-                            </h5>
-                        </div>
-                        <div class="col-auto">
-                            <h6>
-                                20:50
-                            </h6>
-                        </div>
-                        <div class="col-auto">
-                            <h6>
-                                00:23
-                            </h6>
+                <div class="col-md-6">
+                    <div class="shadow p-4">
+                        <div th:each="task : ${lowPriorityOpenedTasks}"
+                             class="row shadow border border-success p-2 mb-2 rounded task">
+                            <div class="col-md-8">
+                                <h5 th:text="${task.getName()}">
+                                </h5>
+                            </div>
+                            <div class="col-auto d-flex">
+                                <h6>
+                                    20:50
+                                </h6>
+                                <h6>
+                                    00:23
+                                </h6>
+                            </div>
+                            <div class="col-auto btn-group task-buttons">
+                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-play"></i></button>
+                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-stop"></i></button>
+                                <button class="btn btn-outline-primary" type="submit"><i class="bi bi-sticky"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash3"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 p-4 shadow">
-                    <div th:each="task : ${lowPriorityCompletedTasks}" class="row shadow border border-success p-2 mb-2 rounded">
-                        <div class="col-md-8">
-                            <h5 th:text="${task.getName()}">
-                            </h5>
-                        </div>
-                        <div class="col-auto">
-                            <h6>
-                                20:50
-                            </h6>
-                        </div>
-                        <div class="col-auto">
-                            <h6>
-                                00:23
-                            </h6>
+                <div class="col-md-6">
+                    <div class="shadow p-4">
+                        <div th:each="task : ${lowPriorityCompletedTasks}"
+                             class="row shadow border border-success p-2 mb-2 rounded task">
+                            <div class="col-md-8">
+                                <h5 th:text="${task.getName()}">
+                                </h5>
+                            </div>
+                            <div class="col-auto d-flex">
+                                <h6>
+                                    20:50
+                                </h6>
+                                <h6>
+                                    00:23
+                                </h6>
+                            </div>
+                            <div class="col-auto btn-group task-buttons">
+                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-play"></i></button>
+                                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-stop"></i></button>
+                                <button class="btn btn-outline-primary" type="submit"><i class="bi bi-sticky"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash3"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

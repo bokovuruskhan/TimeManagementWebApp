@@ -1,0 +1,7 @@
+.task-buttons {
+  display: none;
+}
+
+.task:hover .task-buttons{
+  display: block;
+}
