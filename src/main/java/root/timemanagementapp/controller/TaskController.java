@@ -19,9 +19,15 @@ public class TaskController {
     public List<Task> read() {
         return taskService.getAllTasks();
     }
+
     @PostMapping("/note")
     public Task addNote(@RequestBody NoteDto noteDto) throws Exception {
         return taskService.addNoteToTask(noteDto.getTaskId(), noteDto.getNote());
+    }
+
+    @PostMapping("/priority/change")
+    public Boolean changePriority(@RequestBody Task task) {
+        return taskService.changePriority(task);
     }
 
     @DeleteMapping

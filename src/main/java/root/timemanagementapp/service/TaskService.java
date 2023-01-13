@@ -41,6 +41,17 @@ public class TaskService {
         }
     }
 
+    public Boolean changePriority(Task task) {
+        try {
+            task = findTaskById(task.getId());
+            task.setHighPriority(!task.isHighPriority());
+            save(task);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public Boolean deleteTask(Task task) {
         try {
             Task taskInDb = findTaskById(task.getId());

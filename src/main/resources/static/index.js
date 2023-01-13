@@ -30,6 +30,11 @@ function deleteTask(){
     const jsonData = Object.fromEntries(data.entries());
     sendRequest("/task","DELETE",jsonData,true);
 };
+function changePriority(){
+    const data = new FormData(event.target);
+    const jsonData = Object.fromEntries(data.entries());
+    sendRequest("/task/priority/change","POST",jsonData,true);
+};
 function addTask(){
     const data = new FormData(event.target);
     const jsonData = Object.fromEntries(data.entries());
@@ -48,7 +53,6 @@ function clockTimer()
 
   var currentTime = date.getDate() + "." + date.getMonth() + 1+ "."+ date.getFullYear() +" "+ [time[0],time[1],time[2]].join(':');
   var clock = document.getElementById("clock");
-  console.log(currentTime);
   clock.innerHTML = currentTime;
   setTimeout("clockTimer()", 1000);
 };
