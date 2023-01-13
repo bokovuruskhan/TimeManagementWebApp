@@ -24,10 +24,15 @@ public class Task {
     @Column
     private LocalTime elapsedTime;
 
+    @Column
+    private String note;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sprint_id", nullable = false)
     @JsonIgnore
     private Sprint sprint;
+
+
 
     @Column
     private Boolean highPriority;
@@ -104,5 +109,13 @@ public class Task {
 
     public void setElapsedTime(LocalTime elapsedTime) {
         this.elapsedTime = elapsedTime;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

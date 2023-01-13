@@ -1,7 +1,7 @@
 function refreshPage(){
     document.location.reload();
 };
-function sendRequest(url,method,jsonData) {
+function sendRequest(url,method,jsonData,refreshFlag) {
     var xhr = new XMLHttpRequest();
     var json = JSON.stringify(jsonData);
     console.log(json);
@@ -12,19 +12,26 @@ function sendRequest(url,method,jsonData) {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         const status = xhr.status;
         if (status === 0 || (status >= 200 && status < 400)) {
-          refreshPage();
+            if(refreshFlag){
+                refreshPage();
+            }
         }
       }
     };
     xhr.send(json);
 };
+function addNodeToTask(){
+    const data = new FormData(event.target);
+    const jsonData = Object.fromEntries(data.entries());
+    sendRequest("/task/note","POST",jsonData,false);
+};
 function deleteTask(){
     const data = new FormData(event.target);
     const jsonData = Object.fromEntries(data.entries());
-    sendRequest("/task","DELETE",jsonData);
+    sendRequest("/task","DELETE",jsonData,true);
 };
 function addTask(){
     const data = new FormData(event.target);
     const jsonData = Object.fromEntries(data.entries());
-    sendRequest("/task","POST",jsonData);
+    sendRequest("/task","POST",jsonData,true);
 };

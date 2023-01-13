@@ -7,7 +7,7 @@
                         <div th:each="task : ${highPriorityOpenedTasks}"
                              class="row shadow border p-2 mb-2 rounded task">
                             <div class="col-md-8">
-                                <h5 th:text="${task.getName()}">
+                                <h5 class="text-wrap" th:text="${task.getName()}">
                                 </h5>
                             </div>
                             <div class="col-auto btn-group">
@@ -21,7 +21,8 @@
                                 </button>
                                 <button class="btn btn-sm btn-outline-dark" type="submit"><i class="bi bi-stop"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-primary" type="submit"><i
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        th:data-bs-target="'#noteModal' + ${task.getId()}" type="button"><i
                                         class="bi bi-sticky"></i>
                                 </button>
                                 <form class="btn btn-sm" onsubmit="deleteTask();return false" method="post">
@@ -49,7 +50,8 @@
                                 </button>
                             </div>
                             <div class="col-auto btn-group task-buttons">
-                                <button class="btn btn-sm btn-outline-primary" type="submit"><i
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        th:data-bs-target="'#noteModal' + ${task.getId()}" type="button"><i
                                         class="bi bi-sticky"></i>
                                 </button>
                                 <form class="btn btn-sm" onsubmit="deleteTask();return false" method="post">
@@ -83,7 +85,8 @@
                                 </button>
                                 <button class="btn btn-sm btn-outline-dark" type="submit"><i class="bi bi-stop"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-primary" type="submit"><i
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        th:data-bs-target="'#noteModal' + ${task.getId()}" type="button"><i
                                         class="bi bi-sticky"></i>
                                 </button>
                                 <form class="btn btn-sm" onsubmit="deleteTask();return false" method="post">
@@ -111,7 +114,8 @@
                                 </button>
                             </div>
                             <div class="col-auto btn-group task-buttons">
-                                <button class="btn btn-sm btn-outline-primary" type="submit"><i
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        th:data-bs-target="'#noteModal' + ${task.getId()}" type="button"><i
                                         class="bi bi-sticky"></i>
                                 </button>
                                 <form class="btn btn-sm" onsubmit="deleteTask();return false" method="post">

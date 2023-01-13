@@ -22,6 +22,16 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
+    public Task save(Task task) {
+        return taskRepository.save(task);
+    }
+
+    public Task addNoteToTask(Long taskId, String note) throws Exception {
+        Task task = findTaskById(taskId);
+        task.setNote(note);
+        return save(task);
+    }
+
     public Task findTaskById(Long taskId) throws Exception {
         Optional<Task> optionalTask = taskRepository.findById(taskId);
         if (optionalTask.isPresent()) {

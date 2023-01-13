@@ -3,6 +3,7 @@ package root.timemanagementapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import root.timemanagementapp.database.model.Task;
+import root.timemanagementapp.dto.NoteDto;
 import root.timemanagementapp.service.TaskService;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public class TaskController {
     @GetMapping
     public List<Task> read() {
         return taskService.getAllTasks();
+    }
+    @PostMapping("/note")
+    public Task addNote(@RequestBody NoteDto noteDto) throws Exception {
+        return taskService.addNoteToTask(noteDto.getTaskId(), noteDto.getNote());
     }
 
     @DeleteMapping
