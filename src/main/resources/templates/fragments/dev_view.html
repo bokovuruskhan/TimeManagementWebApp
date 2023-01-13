@@ -37,6 +37,12 @@
                                             type="submit"><i class="bi bi-trash3"></i>
                                     </button>
                                 </form>
+                                <form class="m-0 p-0 btn btn-sm" onsubmit="completeTask();return false" method="post">
+                                    <input name="id" th:value="${task.getId()}" hidden>
+                                    <button class="btn btn-sm btn-outline-success"
+                                            type="submit"><i class="bi bi-check-square"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -105,6 +111,12 @@
                                     <input name="id" th:value="${task.getId()}" hidden>
                                     <button class="btn btn-sm btn-outline-danger"
                                             type="submit"><i class="bi bi-trash3"></i>
+                                    </button>
+                                </form>
+                                <form class="m-0 p-0 btn btn-sm" onsubmit="completeTask();return false" method="post">
+                                    <input name="id" th:value="${task.getId()}" hidden>
+                                    <button class="btn btn-sm btn-outline-success"
+                                            type="submit"><i class="bi bi-check-square"></i>
                                     </button>
                                 </form>
                             </div>

@@ -35,6 +35,11 @@ function changePriority(){
     const jsonData = Object.fromEntries(data.entries());
     sendRequest("/task/priority/change","POST",jsonData,true);
 };
+function completeTask(){
+    const data = new FormData(event.target);
+    const jsonData = Object.fromEntries(data.entries());
+    sendRequest("/task/complete","POST",jsonData,true);
+};
 function addTask(){
     const data = new FormData(event.target);
     const jsonData = Object.fromEntries(data.entries());

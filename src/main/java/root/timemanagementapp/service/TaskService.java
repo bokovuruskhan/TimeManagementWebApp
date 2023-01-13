@@ -41,6 +41,17 @@ public class TaskService {
         }
     }
 
+    public Boolean completeTask(Task task) {
+        try {
+            task = findTaskById(task.getId());
+            task.setCompleted(!task.isCompleted());
+            save(task);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public Boolean changePriority(Task task) {
         try {
             task = findTaskById(task.getId());

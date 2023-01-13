@@ -30,6 +30,11 @@ public class TaskController {
         return taskService.changePriority(task);
     }
 
+    @PostMapping("/complete")
+    public Boolean completeTask(@RequestBody Task task) {
+        return taskService.completeTask(task);
+    }
+
     @DeleteMapping
     public Boolean delete(@RequestBody Task task) {
         return taskService.deleteTask(task);
