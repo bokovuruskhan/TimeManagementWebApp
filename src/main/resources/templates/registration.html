@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/head :: head">
+</head>
+<body class="container container-fluid">
+<div class="bg-light rounded mt-2 shadow p-4">
+    <h1>Пожалуйста зарегистрируйтесь</h1>
+    <form class="form-control p-3" th:object="${user}" th:action="@{/registration}" method="post">
+        <div class="mb-3">
+            <input class="form-control" th:field="*{username}" type="text" name="username" placeholder="Логин"/>
+            <p th:each="error : ${#fields.errors('username')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div class="mb-3">
+            <input class="form-control" th:field="*{password}" type="password" name="password" placeholder="Пароль"/>
+        </div>
+        <div class="mb-3">
+            <input class="form-control" th:field="*{matchingPassword}" type="password" name="passwordMatching" placeholder="Пароль еще раз"/>
+        </div>
+        <div class="mb-3">
+            <select class="form-control" th:field="*{role}" name="role">
+                <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-outline-primary" type="submit">Зарегистрироваться</button>
+            <a href="/login" class="btn btn-outline-primary">Уже есть учетная запись</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/head :: head">
+</head>
+<body class="container container-fluid">
+<div class="bg-light rounded mt-2 shadow p-4">
+    <h1>Пожалуйста авторизуйтесь</h1>
+    <div class="h3 text-danger" th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div class="h3 text-warning" th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form class="form-control p-3" th:action="@{/login}" method="post">
+        <div class="mb-3">
+            <input class="form-control" type="text" name="username" placeholder="Логин"/>
+        </div>
+        <div class="mb-3">
+            <input class="form-control" type="password" name="password" placeholder="Пароль"/>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-outline-primary" type="submit">Войти</button>
+            <a href="/registration" class="btn btn-outline-primary">Зарегистрироваться</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
