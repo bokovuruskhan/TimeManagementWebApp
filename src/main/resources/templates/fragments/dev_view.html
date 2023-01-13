@@ -4,22 +4,22 @@
             <div class="row" style="min-height:6rem;">
                 <div class="col-md-6">
                     <div class="shadow p-4 border border-warning mb-4 overflow-auto" style="max-height:24rem;">
-                        <div th:each="task : ${highPriorityOpenedTasks}"
+                        <div th:id="${task.getId()}" th:each="task : ${highPriorityOpenedTasks}"
                              class="row shadow border p-2 mb-2 rounded task">
                             <div class="col-md-8">
                                 <h5 class="text-wrap" th:text="${task.getName()}">
                                 </h5>
                             </div>
                             <div class="col-auto btn-group">
-                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getEstimatedTime()}">
+                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getEstimatedTimeWithSeconds()}">
                                 </button>
-                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getElapsedTime()}">
+                                <button class="btn btn-sm btn-outline-dark" th:id="'task'+${task.getId()}+'Timer'" th:text="${task.getElapsedTimeWithSeconds()}">
                                 </button>
                             </div>
                             <div class="col-auto btn-group task-buttons">
-                                <button class="btn btn-sm btn-outline-dark" type="button"><i class="bi bi-play"></i>
+                                <button th:task-id="${task.getId()}" th:id="'task'+${task.getId()}+'StartButton'" class="btn btn-sm btn-outline-dark"  th:onclick="startTaskTimer(this.getAttribute('task-id'));" type="button"><i class="bi bi-play"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-dark" type="submit"><i class="bi bi-stop"></i>
+                                <button class="btn btn-sm btn-outline-dark" type="button"><i class="bi bi-stop"></i>
                                 </button>
                                 <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
                                         th:data-bs-target="'#noteModal' + ${task.getId()}" type="button"><i
@@ -56,9 +56,9 @@
                                 </h5>
                             </div>
                             <div class="col-auto btn-group">
-                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getEstimatedTime()}">
+                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getEstimatedTimeWithSeconds()}">
                                 </button>
-                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getElapsedTime()}">
+                                <button class="btn btn-sm btn-outline-dark" th:id="'task'+${task.getId()}+'Timer'" th:text="${task.getElapsedTimeWithSeconds()}">
                                 </button>
                             </div>
                             <div class="col-auto btn-group task-buttons">
@@ -87,13 +87,13 @@
                                 </h5>
                             </div>
                             <div class="col-auto btn-group">
-                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getEstimatedTime()}">
+                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getEstimatedTimeWithSeconds()}">
                                 </button>
-                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getElapsedTime()}">
+                                <button class="btn btn-sm btn-outline-dark" th:id="'task'+${task.getId()}+'Timer'" th:text="${task.getElapsedTimeWithSeconds()}">
                                 </button>
                             </div>
                             <div class="col-auto btn-group task-buttons">
-                                <button class="btn btn-sm btn-outline-dark" type="button"><i class="bi bi-play"></i>
+                                <button th:task-id="${task.getId()}" th:id="'task'+${task.getId()}+'StartButton'" class="btn btn-sm btn-outline-dark"  th:onclick="startTaskTimer(this.getAttribute('task-id'));" type="button"><i class="bi bi-play"></i>
                                 </button>
                                 <button class="btn btn-sm btn-outline-dark" type="submit"><i class="bi bi-stop"></i>
                                 </button>
@@ -132,9 +132,9 @@
                                 </h5>
                             </div>
                             <div class="col-auto btn-group">
-                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getEstimatedTime()}">
+                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getEstimatedTimeWithSeconds()}">
                                 </button>
-                                <button class="btn btn-sm btn-outline-dark" th:text="${task.getElapsedTime()}">
+                                <button class="btn btn-sm btn-outline-dark" th:id="'task'+${task.getId()}+'Timer'" th:text="${task.getElapsedTimeWithSeconds()}">
                                 </button>
                             </div>
                             <div class="col-auto btn-group task-buttons">

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table
@@ -12,6 +13,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String name;
 
@@ -32,8 +34,6 @@ public class Task {
     @JsonIgnore
     private Sprint sprint;
 
-
-
     @Column
     private Boolean highPriority;
 
@@ -45,6 +45,7 @@ public class Task {
         this.completed = false;
         this.sprint = sprint;
         this.highPriority = false;
+
     }
 
     public Long getId() {
@@ -99,12 +100,20 @@ public class Task {
         return estimatedTime;
     }
 
+    public String getEstimatedTimeWithSeconds() {
+        return estimatedTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
+
     public void setEstimatedTime(LocalTime estimatedTime) {
         this.estimatedTime = estimatedTime;
     }
 
     public LocalTime getElapsedTime() {
         return elapsedTime;
+    }
+
+    public String getElapsedTimeWithSeconds() {
+        return elapsedTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 
     public void setElapsedTime(LocalTime elapsedTime) {
