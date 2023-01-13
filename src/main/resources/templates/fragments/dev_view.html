@@ -95,7 +95,7 @@
                             <div class="col-auto btn-group task-buttons">
                                 <button th:task-id="${task.getId()}" th:id="'task'+${task.getId()}+'StartButton'" class="btn btn-sm btn-outline-dark"  th:onclick="startTaskTimer(this.getAttribute('task-id'));" type="button"><i class="bi bi-play"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-dark" type="submit"><i class="bi bi-stop"></i>
+                                <button disabled th:task-id="${task.getId()}" th:id="'task'+${task.getId()}+'StopButton'" class="btn btn-sm btn-outline-dark" th:onclick="stopTaskTimer(this.getAttribute('task-id'));" type="button"><i class="bi bi-stop"></i>
                                 </button>
                                 <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
                                         th:data-bs-target="'#noteModal' + ${task.getId()}" type="button"><i

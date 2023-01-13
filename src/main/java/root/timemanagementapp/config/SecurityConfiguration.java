@@ -46,7 +46,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/dev").hasAnyAuthority("DEV")
                 .requestMatchers("/master").hasAnyAuthority("MASTER")
                 .requestMatchers("/registration").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                     .loginPage("/login")
@@ -57,6 +57,7 @@ public class SecurityConfiguration {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
                 .permitAll();
+        http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
         return http.build();
     }
