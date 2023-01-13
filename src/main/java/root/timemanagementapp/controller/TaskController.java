@@ -26,12 +26,18 @@ public class TaskController {
     }
 
     @PostMapping("/priority/change")
-    public Boolean changePriority(@RequestBody Task task) {
+    public Task changePriority(@RequestBody Task task) throws Exception {
         return taskService.changePriority(task);
     }
 
+    @PostMapping("/time/elapsed")
+    public Task setElapsedTime(@RequestBody Task task) throws Exception {
+        System.out.println(task.getElapsedTime());
+        return taskService.setElapsedTime(task);
+    }
+
     @PostMapping("/complete")
-    public Boolean completeTask(@RequestBody Task task) {
+    public Task completeTask(@RequestBody Task task) throws Exception {
         return taskService.completeTask(task);
     }
 

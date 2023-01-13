@@ -41,26 +41,22 @@ public class TaskService {
         }
     }
 
-    public Boolean completeTask(Task task) {
-        try {
-            task = findTaskById(task.getId());
-            task.setCompleted(!task.isCompleted());
-            save(task);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Task setElapsedTime(Task taskOld) throws Exception {
+        Task task = findTaskById(taskOld.getId());
+        task.setElapsedTime(taskOld.getElapsedTime());
+        return save(task);
     }
 
-    public Boolean changePriority(Task task) {
-        try {
-            task = findTaskById(task.getId());
-            task.setHighPriority(!task.isHighPriority());
-            save(task);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Task completeTask(Task task) throws Exception {
+        task = findTaskById(task.getId());
+        task.setCompleted(!task.isCompleted());
+        return save(task);
+    }
+
+    public Task changePriority(Task task) throws Exception {
+        task = findTaskById(task.getId());
+        task.setHighPriority(!task.isHighPriority());
+        return save(task);
     }
 
     public Boolean deleteTask(Task task) {

@@ -1,3 +1,4 @@
+var taskTimers = {};
 function refreshPage(){
     document.location.reload();
 };
@@ -45,13 +46,29 @@ function addTask(){
     const jsonData = Object.fromEntries(data.entries());
     sendRequest("/task","POST",jsonData,true);
 };
+function setElapsedTime(taskId,elapsedTime){
+    const entries = new Map([
+      ['id', taskId],
+      ['elapsedTime', elapsedTime]
+    ]);
+    const jsonData = Object.fromEntries(entries);
+    sendRequest("/task/time/elapsed","POST",jsonData,false);
+};
 function startTaskTimer(taskId){
     var timer = document.getElementById("task"+taskId+"Timer");
     var timeString = timer.innerHTML.split(':');
     var time = [parseInt(timeString[0]),parseInt(timeString[1]),parseInt(timeString[2])];
-    time[0] += 1;
+    time[2] += 1;
 
-    console.log(time);
+    if(time[2]>=60){
+    time[2]=0;
+    time[1]+=1;
+    }
+    if(time[1]>=60){
+    time[1]=0;
+    time[0]+=1;
+    }
+
     if(time[0] < 10){time[0] = "0"+ time[0];}
     if(time[1] < 10){time[1] = "0"+ time[1];}
     if(time[2] < 10){time[2] = "0"+ time[2];}
@@ -59,11 +76,49 @@ function startTaskTimer(taskId){
     timeString = [time[0],time[1],time[2]].join(':');
     timer.innerHTML = timeString;
 
-    var startButton = document.getElementById("task"+taskId+"StartButton");
-    if(startButton.disabled == false){
-        startButton.disabled = true;
+    if((time[2]%5)==0){
+        setElapsedTime(taskId,timeString);
     }
-    setTimeout("startTaskTimer("+taskId+")", 1000);
+
+    var startButton = document.getElementById("task"+taskId+"StartButton");
+    var startButton = document.getElementById("task"+taskId+"StartButton");
+    var stopButton = document.getElementById("task"+taskId+"StopButton");
+    startButton.disabled = true;
+    stopButton.disabled = false;
+    timer = setTimeout("startTaskTimer("+taskId+")", 1000);
+    taskTimers[taskId]=timer;
+};
+function stopTaskTimer(taskId){
+    var timer = document.getElementById("task"+taskId+"Timer");
+    var timeString = timer.innerHTML.split(':');
+    var time = [parseInt(timeString[0]),parseInt(timeString[1]),parseInt(timeString[2])];
+    time[2] += 1;
+
+    if(time[2]>=60){
+        time[2]=0;
+        time[1]+=1;
+    }
+    if(time[1]>=60){
+        time[1]=0;
+        time[0]+=1;
+    }
+    if(time[0] < 10){time[0] = "0"+ time[0];}
+    if(time[1] < 10){time[1] = "0"+ time[1];}
+    if(time[2] < 10){time[2] = "0"+ time[2];}
+    timeString = [time[0],time[1],time[2]].join(':');
+    setElapsedTime(taskId,timeString);
+
+    if((time[2]%5)==0){
+        setElapsedTime(taskId,timeString);
+    }
+
+    var startButton = document.getElementById("task"+taskId+"StartButton");
+    var stopButton = document.getElementById("task"+taskId+"StopButton");
+    startButton.disabled = false;
+    stopButton.disabled = true;
+
+    clearTimeout(taskTimers[taskId]);
+    delete taskTimers[taskId];
 };
 function clockTimer()
 {
