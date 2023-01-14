@@ -6,13 +6,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import root.timemanagementapp.database.model.User;
 import root.timemanagementapp.dto.RoleNames;
+import root.timemanagementapp.dto.UserDto;
 import root.timemanagementapp.service.SprintService;
 import root.timemanagementapp.service.TaskService;
-
-import java.util.Arrays;
 
 @Controller
 public class WebController {
@@ -29,7 +28,6 @@ public class WebController {
     @RequestMapping("/")
     public String index(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(Arrays.toString(auth.getAuthorities().toArray()));
         if (auth.getAuthorities().toArray()[0].toString().equals(RoleNames.MASTER_ROLE)) {
             return "redirect:/master";
         } else {
@@ -44,6 +42,11 @@ public class WebController {
         model.addAttribute("lowPriorityOpenedTasks", taskService.getActiveSprintLowPriorityOpenedTasks());
         model.addAttribute("highPriorityOpenedTasks", taskService.getActiveSprintHighPriorityOpenedTasks());
         model.addAttribute("activeSprint", sprintService.getActiveSprint());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDto currentUser = new UserDto();
+        currentUser.setUsername(((User) auth.getPrincipal()).getUsername());
+        currentUser.setRole(auth.getAuthorities().toArray()[0].toString());
+        model.addAttribute("currentUser",currentUser);
         return "dev";
     }
 
@@ -54,6 +57,11 @@ public class WebController {
         model.addAttribute("lowPriorityOpenedTasks", taskService.getActiveSprintLowPriorityOpenedTasks());
         model.addAttribute("highPriorityOpenedTasks", taskService.getActiveSprintHighPriorityOpenedTasks());
         model.addAttribute("activeSprint", sprintService.getActiveSprint());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDto currentUser = new UserDto();
+        currentUser.setUsername(((User) auth.getPrincipal()).getUsername());
+        currentUser.setRole(auth.getAuthorities().toArray()[0].toString());
+        model.addAttribute("currentUser",currentUser);
         return "master";
     }
 

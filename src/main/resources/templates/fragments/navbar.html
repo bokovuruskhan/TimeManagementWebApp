@@ -9,7 +9,8 @@
                     </div>
                     <div class="modal-body">
                         <input class="form-control mb-2" type="text" name="name" placeholder="Задача" required>
-                        <input class="form-control mb-2" type="time" name="estimatedTime" placeholder="Оцененное время" required>
+                        <input class="form-control mb-2" type="time" name="estimatedTime" placeholder="Оцененное время"
+                               required>
                         <select class="form-select form-control" name="highPriority" required>
                             <option value="true" selected>Высокий приоритет</option>
                             <option value="false">Низкий приоритет</option>
@@ -19,6 +20,25 @@
                         <button type="submit" class="btn form-control btn-outline-dark">Добавить</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-header p-5 pb-4 border-bottom-0">
+                    <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+                    <h1 class="fw-bold mb-0 fs-2" th:text="${currentUser.getUsername()}"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 pt-0">
+                    <form class="">
+                        <div class="form-floating mb-3">
+                            <input type="text"  th:value="${currentUser.getRole()}" class="form-control rounded-3" id="roleInput" readonly>
+                            <label for="roleInput">Тип учетной записи</label>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -34,11 +54,12 @@
                 </h6>
                 <h6 class="navbar-brand shadow rounded p-2" th:text="${activeSprint.getName()}">
                 </h6>
-                <button class="rounded p-2 btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#addTaskModal" type="button">+Добавить задачу
+                <button class="rounded p-2 btn btn-sm btn-outline-dark" data-bs-toggle="modal"
+                        data-bs-target="#addTaskModal" type="button">+Добавить задачу
                 </button>
-                <button class="btn btn-outline-dark ms-2" type="submit"><i class="bi bi-person-badge"></i></button>
-                <button class="btn btn-outline-success ms-2" type="submit"><i class="bi bi-info-square"></i></button>
-                <button class="btn btn-outline-danger ms-2 me-4" type="submit"><i class="bi bi-x-lg"></i></button>
+                <button class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#profileModal" type="button"><i class="bi bi-person-badge"></i></button>
+                <button class="btn btn-outline-success ms-2" type="button"><i class="bi bi-info-square"></i></button>
+                <button class="btn btn-outline-danger ms-2 me-4" type="button"><i class="bi bi-x-lg"></i></button>
             </div>
         </div>
     </nav>
