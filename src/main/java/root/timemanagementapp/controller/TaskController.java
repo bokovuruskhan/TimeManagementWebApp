@@ -1,9 +1,13 @@
 package root.timemanagementapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import root.timemanagementapp.database.model.Task;
+import root.timemanagementapp.database.model.User;
 import root.timemanagementapp.dto.NoteDto;
+import root.timemanagementapp.dto.TaskDto;
 import root.timemanagementapp.service.TaskService;
 
 import java.util.List;
@@ -26,28 +30,29 @@ public class TaskController {
     }
 
     @PostMapping("/priority/change")
-    public Task changePriority(@RequestBody Task task) throws Exception {
-        return taskService.changePriority(task);
+    public Task changePriority(@RequestBody TaskDto taskDto) throws Exception {
+        return taskService.changePriority(taskDto);
     }
 
     @PostMapping("/time/elapsed")
-    public Task setElapsedTime(@RequestBody Task task) throws Exception {
-        System.out.println(task.getElapsedTime());
-        return taskService.setElapsedTime(task);
+    public Task setElapsedTime(@RequestBody TaskDto taskDto) throws Exception {
+        return taskService.setElapsedTime(taskDto);
     }
 
     @PostMapping("/complete")
-    public Task completeTask(@RequestBody Task task) throws Exception {
-        return taskService.completeTask(task);
+    public Task completeTask(@RequestBody TaskDto taskDto) throws Exception {
+        return taskService.completeTask(taskDto);
     }
 
     @DeleteMapping
-    public Boolean delete(@RequestBody Task task) {
-        return taskService.deleteTask(task);
+    public Boolean delete(@RequestBody TaskDto taskDto) {
+        return taskService.deleteTask(taskDto);
     }
 
     @PostMapping
-    public Task create(@RequestBody Task task) throws Exception {
-        return taskService.addTask(task);
+    public Task create(@RequestBody TaskDto taskDto) throws Exception {
+        System.out.println(taskDto.getName());
+        System.out.println(taskDto);
+        return taskService.addTask(taskDto);
     }
 }

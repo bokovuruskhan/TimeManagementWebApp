@@ -37,6 +37,11 @@ public class Task {
     @Column
     private Boolean highPriority;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private User user;
+
     public Task() {
     }
 
@@ -126,5 +131,13 @@ public class Task {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import root.timemanagementapp.database.model.Task;
 import root.timemanagementapp.database.repo.TaskRepository;
+import root.timemanagementapp.dto.TaskDto;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -17,6 +18,8 @@ public class TaskService {
 
     @Autowired
     private SprintService sprintService;
+    @Autowired
+    private UserService userService;
 
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
@@ -41,38 +44,43 @@ public class TaskService {
         }
     }
 
-    public Task setElapsedTime(Task taskOld) throws Exception {
-        Task task = findTaskById(taskOld.getId());
-        task.setElapsedTime(taskOld.getElapsedTime());
+    public Task setElapsedTime(TaskDto taskDto) throws Exception {
+        Task task = findTaskById(taskDto.getId());
+        task.setElapsedTime(taskDto.getElapsedTime());
         return save(task);
     }
 
-    public Task completeTask(Task task) throws Exception {
-        task = findTaskById(task.getId());
+    public Task completeTask(TaskDto taskDto) throws Exception {
+        Task task = findTaskById(taskDto.getId());
         task.setCompleted(!task.isCompleted());
         return save(task);
     }
 
-    public Task changePriority(Task task) throws Exception {
-        task = findTaskById(task.getId());
+    public Task changePriority(TaskDto taskDto) throws Exception {
+        Task task = findTaskById(taskDto.getId());
         task.setHighPriority(!task.isHighPriority());
         return save(task);
     }
 
-    public Boolean deleteTask(Task task) {
+    public Boolean deleteTask(TaskDto taskDto) {
         try {
-            Task taskInDb = findTaskById(task.getId());
-            taskRepository.delete(taskInDb);
+            Task task = findTaskById(taskDto.getId());
+            taskRepository.delete(task);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public Task addTask(Task task) throws Exception {
+    public Task addTask(TaskDto taskDto) throws Exception {
+        Task task = new Task();
+        task.setName(taskDto.getName());
+        task.setHighPriority(taskDto.getHighPriority());
         task.setCompleted(false);
+        task.setEstimatedTime(taskDto.getEstimatedTime());
         task.setElapsedTime(LocalTime.of(0, 0));
         task.setSprint(sprintService.getActiveSprint());
+        task.setUser(userService.findUserById(taskDto.getUserId()));
         return taskRepository.save(task);
     }
 
@@ -82,6 +90,14 @@ public class TaskService {
 
     public List<Task> getActiveSprintOpenedTasks() throws Exception {
         return sprintService.getActiveSprint().getTasks().stream().filter(Task -> !Task.isCompleted()).collect(Collectors.toList());
+    }
+
+    public List<Task> getActiveSprintCompletedTasksByUserId(Long userId) throws Exception {
+        return sprintService.getActiveSprint().getTasks().stream().filter(Task -> Task.isCompleted() && Task.getUser().getId().equals(userId)).collect(Collectors.toList());
+    }
+
+    public List<Task> getActiveSprintOpenedTasksByUserId(Long userId) throws Exception {
+        return sprintService.getActiveSprint().getTasks().stream().filter(Task -> !Task.isCompleted() && Task.getUser().getId().equals(userId)).collect(Collectors.toList());
     }
 
     public List<Task> getActiveSprintHighPriorityCompletedTasks() throws Exception {
@@ -98,6 +114,22 @@ public class TaskService {
 
     public List<Task> getActiveSprintLowPriorityOpenedTasks() throws Exception {
         return getActiveSprintOpenedTasks().stream().filter(Task -> !Task.isHighPriority()).collect(Collectors.toList());
+    }
+
+    public List<Task> getActiveSprintHighPriorityCompletedTasksByUserId(Long userId) throws Exception {
+        return getActiveSprintCompletedTasksByUserId(userId).stream().filter(Task::isHighPriority).collect(Collectors.toList());
+    }
+
+    public List<Task> getActiveSprintHighPriorityOpenedTasksByUserId(Long userId) throws Exception {
+        return getActiveSprintOpenedTasksByUserId(userId).stream().filter(Task::isHighPriority).collect(Collectors.toList());
+    }
+
+    public List<Task> getActiveSprintLowPriorityCompletedTasksByUserId(Long userId) throws Exception {
+        return getActiveSprintCompletedTasksByUserId(userId).stream().filter(Task -> !Task.isHighPriority()).collect(Collectors.toList());
+    }
+
+    public List<Task> getActiveSprintLowPriorityOpenedTasksByUserId(Long userId) throws Exception {
+        return getActiveSprintOpenedTasksByUserId(userId).stream().filter(Task -> !Task.isHighPriority()).collect(Collectors.toList());
     }
 
 }
