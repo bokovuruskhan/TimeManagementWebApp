@@ -33,12 +33,12 @@ public class RegistrationController {
     @PostMapping
     public String registration(@ModelAttribute("user") UserDto userDto, Errors errors, Model model) throws Exception {
         if (!userDto.getPassword().equals(userDto.getMatchingPassword())) {
-            model.addAttribute("passwordError", "Пароли не совпадают");
-            return "registration";
+            model.addAttribute("error", "Пароли не совпадают");
+            return showRegistrationPage(model);
         }
         if (!userService.save(userDto)) {
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-            return "registration";
+            model.addAttribute("error", "Пользователь с таким именем уже существует");
+            return showRegistrationPage(model);
         }
         return "redirect:/login";
     }

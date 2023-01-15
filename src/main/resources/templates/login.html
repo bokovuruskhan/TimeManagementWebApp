@@ -8,9 +8,6 @@
     <div class="h3 text-danger" th:if="${param.error}">
         Invalid username and password.
     </div>
-    <div class="h3 text-warning" th:if="${param.logout}">
-        You have been logged out.
-    </div>
     <form class="form-control p-3" th:action="@{/login}" method="post">
         <div class="mb-3">
             <input class="form-control" type="text" name="username" placeholder="Логин"/>
