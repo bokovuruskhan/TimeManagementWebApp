@@ -44,7 +44,43 @@
             </div>
         </div>
     </div>
-
+    <div th:if="${currentUser.isMaster()}" class="modal fade" id="sprintSettingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Настройки спринта</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form onsubmit="updateSprint();return false" method="post">
+                        <input name="id" th:value="${activeSprint.getId()}" hidden>
+                        <input class="form-control border border-success mb-3" type="text"
+                               th:value="${activeSprint.getName()}" name="name"
+                               placeholder="Название спринта" required>
+                        <p class="form-control"
+                           th:text="${'Количество сделанных задач: '+activeSprint.getCompletedTasksCount()}">
+                        </p>
+                        <p class="form-control"
+                           th:text="${'Количество несделанных задач: '+activeSprint.getInWorkTasksCount()}">
+                        </p>
+                        <p class="form-control"
+                           th:text="${'Перерасход по времени: '+activeSprint.getTimeOverruns()+' %'}">
+                            Перерасход по времени: 0
+                        </p>
+                        <div class="mb-2">
+                            <input id="finishCheckBox" class="form-check-input" type="checkbox" value="true" name="active" checked>
+                            <label class="form-check-label" for="finishCheckBox">
+                                Активный
+                            </label>
+                        </div>
+                        <button type="submit" data-bs-dismiss="modal" aria-label="Close"
+                                class="btn form-control btn-outline-success">Сохранить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
@@ -57,13 +93,18 @@
                 </h6>
                 <h6 class="navbar-brand shadow rounded p-2" th:text="${activeSprint.getName()}">
                 </h6>
+                <button class="navbar-brand shadow rounded p-2 btn btn-sm btn-outline-warning" data-bs-toggle="modal"
+                        data-bs-target="#sprintSettingsModal" th:if="${currentUser.isMaster()}"><i
+                        class="bi bi-gear"></i></button>
                 <button class="rounded p-2 btn btn-sm btn-outline-dark" data-bs-toggle="modal"
                         data-bs-target="#addTaskModal" type="button">+Добавить задачу
                 </button>
                 <button class="btn btn-sm btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#profileModal"
                         type="button"><i class="bi bi-person-badge"></i></button>
-                <button class="btn btn-sm btn-outline-success ms-2" type="button"><i class="bi bi-info-square"></i></button>
-                <a href="/logout" class="btn btn-sm btn-outline-danger ms-2 me-4" type="button"><i class="bi bi-x-lg"></i></a>
+                <button class="btn btn-sm btn-outline-success ms-2" type="button"><i class="bi bi-info-square"></i>
+                </button>
+                <a href="/logout" class="btn btn-sm btn-outline-danger ms-2 me-4" type="button"><i
+                        class="bi bi-x-lg"></i></a>
             </div>
         </div>
     </nav>

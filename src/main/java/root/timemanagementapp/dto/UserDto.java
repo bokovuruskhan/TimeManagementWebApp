@@ -46,4 +46,13 @@ public class UserDto {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public boolean isMaster() {
+        return role.equals(RoleNames.MASTER_ROLE);
+    }
+
+    public boolean isDev() {
+        return role.equals(RoleNames.DEV_ROLE);
+    }
+
 }

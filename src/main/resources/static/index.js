@@ -46,6 +46,11 @@ function addTask(){
     const jsonData = Object.fromEntries(data.entries());
     sendRequest("/task","POST",jsonData,true);
 };
+function updateSprint(){
+    const data = new FormData(event.target);
+    const jsonData = Object.fromEntries(data.entries());
+    sendRequest("/sprint/update","POST",jsonData,true);
+};
 function setElapsedTime(taskId,elapsedTime){
     const entries = new Map([
       ['id', taskId],
