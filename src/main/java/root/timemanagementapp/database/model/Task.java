@@ -140,4 +140,21 @@ public class Task {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public boolean isNormalStatus() {
+        return elapsedTime.toSecondOfDay() < (estimatedTime.toSecondOfDay() * 0.5);
+    }
+
+    public boolean isPrimaryStatus() {
+        return elapsedTime.toSecondOfDay() >= (estimatedTime.toSecondOfDay() * 0.5) && elapsedTime.toSecondOfDay() < (estimatedTime.toSecondOfDay() * 0.8);
+    }
+
+    public boolean isWarningStatus() {
+        return elapsedTime.toSecondOfDay() >= (estimatedTime.toSecondOfDay() * 0.8) && elapsedTime.toSecondOfDay() < (estimatedTime.toSecondOfDay());
+    }
+
+    public boolean isDangerStatus() {
+        return elapsedTime.toSecondOfDay() >= estimatedTime.toSecondOfDay();
+    }
+
 }

@@ -1,7 +1,28 @@
 .task-buttons {
-  display: none;
+    display: none;
 }
 
 .task:hover .task-buttons{
-  display: block;
+    display: block;
+}
+
+.task-status{
+    border: 1px solid;
+    padding: 10px;
+}
+
+.task-status-normal{
+    box-shadow: 5px 10px green;
+}
+
+.task-status-primary{
+    box-shadow: 5px 10px yellow;
+}
+
+.task-status-warning{
+    box-shadow: 5px 10px orange;
+}
+
+.task-status-danger{
+    box-shadow: 5px 10px red;
 }
