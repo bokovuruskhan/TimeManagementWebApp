@@ -1,35 +1,52 @@
-<div th:fragment="dev_view">
-    <div class="container">
+<div class="m-4" th:fragment="dev_view">
+    <div class="row mb-2">
+        <div class="shadow vertical-text">
+        </div>
         <div class="row">
-            <div class="row" style="min-height:6rem;">
-                <div class="col-md-6">
-                    <div class="shadow p-4 border border-dark mb-4 overflow-auto" style="max-height:24rem;">
-                        <div th:each="task : ${highPriorityOpenedTasks}">
-                            <div th:insert="fragments/task_div :: task_div"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="shadow p-4 border border-dark mb-4 overflow-auto" style="max-height:24rem;">
-                        <div th:each="task : ${highPriorityCompletedTasks}">
-                            <div th:insert="fragments/task_div :: task_div"></div>
-                        </div>
+            <div class="col-md-6 text-center">
+                <p class="rounded-2 shadow p-2"><i class="bi bi-clock"></i> In work</p>
+            </div>
+            <div class="col-md-6 text-center " >
+                <p class="rounded-2 shadow p-2"><i class="bi bi-check2-all"></i> Completed</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="shadow vertical-text">
+            <code>High</code>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="min-height:6rem;">
+                <div class="shadow p-4 rounded-2 mb-4 overflow-auto" style="max-height:24rem;">
+                    <div th:each="task : ${highPriorityOpenedTasks}">
+                        <div th:insert="fragments/task_div :: task_div"></div>
                     </div>
                 </div>
             </div>
-            <div class="row " style="min-height:6rem;">
-                <div class="col-md-6">
-                    <div class="shadow p-4 border border-dark mb-4 overflow-auto" style="max-height:24rem;">
-                        <div th:each="task : ${lowPriorityOpenedTasks}">
-                            <div th:insert="fragments/task_div :: task_div"></div>
-                        </div>
+            <div class="col-md-6" style="min-height:6rem;">
+                <div class="shadow p-4 rounded-2 mb-4 overflow-auto" style="max-height:24rem;">
+                    <div th:each="task : ${highPriorityCompletedTasks}">
+                        <div th:insert="fragments/task_div :: task_div"></div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="shadow p-4 border border-dark mb-4 overflow-auto" style="max-height:24rem;">
-                        <div th:each="task : ${lowPriorityCompletedTasks}">
-                            <div th:insert="fragments/task_div :: task_div"></div>
-                        </div>
+            </div>
+        </div>
+        <div class="shadow vertical-text">
+            <code>Low</code>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="min-height:6rem;">
+                <div class="shadow p-4 rounded-2 mb-4 overflow-auto" style="max-height:24rem;">
+                    <div th:each="task : ${lowPriorityOpenedTasks}">
+                        <div th:insert="fragments/task_div :: task_div"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="min-height:6rem;">
+                <div class="shadow p-4 rounded-2 mb-4 overflow-auto" style="max-height:24rem;">
+                    <div th:each="task : ${lowPriorityCompletedTasks}">
+                        <div th:insert="fragments/task_div :: task_div"></div>
                     </div>
                 </div>
             </div>

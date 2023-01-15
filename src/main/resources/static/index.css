@@ -11,6 +11,12 @@
     padding: 10px;
 }
 
+.vertical-text{
+    width:1px;
+    word-wrap: break-word;
+    white-space:pre-wrap;
+}
+
 .task-status-normal{
     box-shadow: 5px 10px green;
 }
