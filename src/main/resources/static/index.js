@@ -51,10 +51,12 @@ function updateSprint(){
     const jsonData = Object.fromEntries(data.entries());
     sendRequest("/sprint/update","POST",jsonData,true);
 };
-function setElapsedTime(taskId,elapsedTime){
+function setElapsedTime(taskId,elapsedHours,elapsedMinutes,elapsedSeconds){
     const entries = new Map([
       ['id', taskId],
-      ['elapsedTime', elapsedTime]
+      ['elapsedHours', elapsedHours],
+      ['elapsedMinutes',elapsedMinutes],
+      ['elapsedSeconds',elapsedSeconds]
     ]);
     const jsonData = Object.fromEntries(entries);
     sendRequest("/task/time/elapsed","POST",jsonData,false);
@@ -82,7 +84,7 @@ function startTaskTimer(taskId){
     timer.innerHTML = timeString;
 
     if((time[2]%5)==0){
-        setElapsedTime(taskId,timeString);
+        setElapsedTime(taskId,time[0],time[1],time[2]);
     }
 
     var startButton = document.getElementById("task"+taskId+"StartButton");
@@ -97,6 +99,9 @@ function stopTaskTimer(taskId){
     var timer = document.getElementById("task"+taskId+"Timer");
     var timeString = timer.innerHTML.split(':');
     var time = [parseInt(timeString[0]),parseInt(timeString[1]),parseInt(timeString[2])];
+
+    setElapsedTime(taskId,time[0],time[1],time[2]);
+
     time[2] += 1;
 
     if(time[2]>=60){
@@ -111,11 +116,8 @@ function stopTaskTimer(taskId){
     if(time[1] < 10){time[1] = "0"+ time[1];}
     if(time[2] < 10){time[2] = "0"+ time[2];}
     timeString = [time[0],time[1],time[2]].join(':');
-    setElapsedTime(taskId,timeString);
 
-    if((time[2]%5)==0){
-        setElapsedTime(taskId,timeString);
-    }
+
 
     var startButton = document.getElementById("task"+taskId+"StartButton");
     var stopButton = document.getElementById("task"+taskId+"StopButton");

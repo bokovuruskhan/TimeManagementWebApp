@@ -34,10 +34,10 @@
         </div>
         <div class="col-auto btn-group">
             <button class="btn btn-sm btn-outline-dark"
-                    th:text="${task.getEstimatedTimeWithSeconds()}">
+                    th:text="${task.getEstimatedTimeString()}">
             </button>
             <button class="btn btn-sm btn-outline-dark" th:id="'task'+${task.getId()}+'Timer'"
-                    th:text="${task.getElapsedTimeWithSeconds()}">
+                    th:text="${task.getElapsedTimeString()}">
             </button>
         </div>
         <div class="col-auto btn-group task-buttons">

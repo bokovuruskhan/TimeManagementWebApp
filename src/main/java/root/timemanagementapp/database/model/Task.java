@@ -3,9 +3,6 @@ package root.timemanagementapp.database.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 @Entity
 @Table
 public class Task {
@@ -21,10 +18,10 @@ public class Task {
     private Boolean completed;
 
     @Column
-    private LocalTime estimatedTime;
+    private Long estimatedTimeInSeconds;
 
     @Column
-    private LocalTime elapsedTime;
+    private Long elapsedTimeInSeconds;
 
     @Column
     private String note;
@@ -85,44 +82,12 @@ public class Task {
         this.highPriority = highPriority;
     }
 
-    public Boolean isHighPriority() {
-        return highPriority;
-    }
-
-    public Boolean isCompleted() {
-        return completed;
-    }
-
     public Sprint getSprint() {
         return sprint;
     }
 
     public void setSprint(Sprint sprint) {
         this.sprint = sprint;
-    }
-
-    public LocalTime getEstimatedTime() {
-        return estimatedTime;
-    }
-
-    public String getEstimatedTimeWithSeconds() {
-        return estimatedTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-    }
-
-    public void setEstimatedTime(LocalTime estimatedTime) {
-        this.estimatedTime = estimatedTime;
-    }
-
-    public LocalTime getElapsedTime() {
-        return elapsedTime;
-    }
-
-    public String getElapsedTimeWithSeconds() {
-        return elapsedTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-    }
-
-    public void setElapsedTime(LocalTime elapsedTime) {
-        this.elapsedTime = elapsedTime;
     }
 
     public String getNote() {
@@ -141,20 +106,20 @@ public class Task {
         this.user = user;
     }
 
-    public boolean isNormalStatus() {
-        return elapsedTime.toSecondOfDay() < (estimatedTime.toSecondOfDay() * 0.5);
+    public Long getEstimatedTimeInSeconds() {
+        return estimatedTimeInSeconds;
     }
 
-    public boolean isPrimaryStatus() {
-        return elapsedTime.toSecondOfDay() >= (estimatedTime.toSecondOfDay() * 0.5) && elapsedTime.toSecondOfDay() < (estimatedTime.toSecondOfDay() * 0.8);
+    public void setEstimatedTimeInSeconds(Long estimatedTimeInSeconds) {
+        this.estimatedTimeInSeconds = estimatedTimeInSeconds;
     }
 
-    public boolean isWarningStatus() {
-        return elapsedTime.toSecondOfDay() >= (estimatedTime.toSecondOfDay() * 0.8) && elapsedTime.toSecondOfDay() < (estimatedTime.toSecondOfDay());
+    public Long getElapsedTimeInSeconds() {
+        return elapsedTimeInSeconds;
     }
 
-    public boolean isDangerStatus() {
-        return elapsedTime.toSecondOfDay() >= estimatedTime.toSecondOfDay();
+    public void setElapsedTimeInSeconds(Long elapsedTimeInSeconds) {
+        this.elapsedTimeInSeconds = elapsedTimeInSeconds;
     }
 
 }

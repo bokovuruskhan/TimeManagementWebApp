@@ -1,11 +1,8 @@
 package root.timemanagementapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import root.timemanagementapp.database.model.Task;
-import root.timemanagementapp.database.model.User;
 import root.timemanagementapp.dto.NoteDto;
 import root.timemanagementapp.dto.TaskDto;
 import root.timemanagementapp.service.TaskService;
@@ -20,7 +17,7 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    public List<Task> read() {
+    public List<TaskDto> read() {
         return taskService.getAllTasks();
     }
 
@@ -50,9 +47,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task create(@RequestBody TaskDto taskDto) throws Exception {
-        System.out.println(taskDto.getName());
-        System.out.println(taskDto);
+    public Task create(@RequestBody TaskDto taskDto){
         return taskService.addTask(taskDto);
     }
 }
