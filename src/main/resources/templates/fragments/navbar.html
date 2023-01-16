@@ -115,6 +115,33 @@
             </div>
         </div>
     </div>
+    <div th:if="${currentUser.isMaster()}" class="modal fade" id="statisticsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Аналитика</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="form-control"
+                       th:text="${'Суммарное время всех оцененных часов по задачам в работе, по всем пользователям: '+statistics.getX()}">
+                    </p>
+                    <p class="form-control"
+                       th:text="${'Суммарное время всех потраченных часов по задачам в работе, по всем пользователям: '+statistics.getY()}">
+                    </p>
+                    <p class="form-control"
+                       th:text="${'Суммарное количество пользователей, у которых есть задачи в этом спринте: '+statistics.getC1()}">
+                    </p>
+                    <p class="form-control"
+                       th:text="${'Суммарное количество задач в этом спринте: '+statistics.getC2()}">
+                    </p>
+                    <p class="form-control border border-success"
+                       th:text="${'Суммарное количество часов на задачи в этом спринте: '+statistics.getE()}">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
