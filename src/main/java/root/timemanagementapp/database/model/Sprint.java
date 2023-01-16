@@ -64,17 +64,4 @@ public class Sprint {
         return active;
     }
 
-    public long getCompletedTasksCount(){
-        return tasks.stream().filter(Task::getCompleted).count();
-    }
-
-    public long getInWorkTasksCount(){
-        return tasks.stream().filter(Task->!Task.getCompleted()).count();
-    }
-
-    public Double getTimeOverruns(){
-        return Math.ceil((tasks.stream().mapToDouble(Task::getElapsedTimeInSeconds).sum() /
-                tasks.stream().mapToDouble(Task::getEstimatedTimeInSeconds).sum())*100);
-    }
-
 }

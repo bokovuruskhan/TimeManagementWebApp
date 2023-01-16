@@ -4,41 +4,54 @@ import root.timemanagementapp.database.model.Sprint;
 import root.timemanagementapp.database.model.Task;
 
 public class StatisticsDto {
+    private final long timeOverruns;
 
-    private final long x;
+    private final long completedTasksCount;
 
-    private final long y;
-
-    private final long c1;
-    private final long c2;
-
-    private final long e;
+    private final long inWorkTasksCount;
 
     public StatisticsDto(Sprint sprint) {
-        x = sprint.getTasks().stream().filter(Task -> !Task.getCompleted()).map(TaskDto::new).mapToLong(TaskDto::getEstimatedHours).sum();
-        y = sprint.getTasks().stream().filter(Task -> !Task.getCompleted()).map(TaskDto::new).mapToLong(TaskDto::getElapsedHours).sum();
-        c1 = sprint.getTasks().stream().map(Task::getUser).count();
-        c2 = sprint.getTasks().size();
-        e = sprint.getTasks().stream().map(TaskDto::new).mapToLong(TaskDto::getEstimatedHours).sum();
+        timeOverruns = (long) ((sprint.getTasks().stream().mapToDouble(Task::getElapsedTimeInSeconds).sum() /
+                sprint.getTasks().stream().mapToDouble(Task::getEstimatedTimeInSeconds).sum()) * 100);
+        completedTasksCount = sprint.getTasks().stream().filter(Task::getCompleted).count();
+        inWorkTasksCount = sprint.getTasks().stream().filter(Task -> !Task.getCompleted()).count();
     }
 
-    public long getX() {
-        return x;
+    public long getTimeOverruns() {
+        return timeOverruns;
     }
 
-    public long getY() {
-        return y;
+    public long getCompletedTasksCount() {
+        return completedTasksCount;
     }
 
-    public long getC1() {
-        return c1;
+    public long getInWorkTasksCount() {
+        return inWorkTasksCount;
     }
 
-    public long getC2() {
-        return c2;
+    public long getTimeOverrunsPercent() {
+        if (timeOverruns > 100) {
+            return timeOverruns - 100;
+        } else {
+            return 0;
+        }
     }
 
-    public long getE() {
-        return e;
+    public boolean isNormalStatus() {
+        return timeOverruns < 50;
+    }
+
+    public boolean isPrimaryStatus() {
+        return timeOverruns >= 50 && timeOverruns < 80;
+    }
+
+    public boolean isWarningStatus() {
+        return timeOverruns >= 80 && timeOverruns < 100;
+    }
+
+    public boolean isDangerStatus() {
+        return timeOverruns > 100;
     }
 }
+
+

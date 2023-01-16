@@ -11,12 +11,6 @@
     padding: 10px;
 }
 
-.vertical-text{
-    width:1px;
-    word-wrap: break-word;
-    white-space:pre-wrap;
-}
-
 .task-status-normal{
     box-shadow: 5px 10px green;
 }
@@ -32,3 +26,38 @@
 .task-status-danger{
     box-shadow: 5px 10px red;
 }
+
+.sprint-status-circle {
+    width: 2rem;
+    height: 2rem;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.sprint-status-circle-normal{
+    background: green;
+}
+
+.sprint-status-circle-primary{
+    background: yellow;
+}
+
+.sprint-status-circle-warning{
+    background: orange;
+}
+
+.sprint-status-circle-danger{
+    background: red;
+}
+
+.vertical-text{
+    width:1px;
+    word-wrap: break-word;
+    white-space:pre-wrap;
+}
+
+
+
+
+
