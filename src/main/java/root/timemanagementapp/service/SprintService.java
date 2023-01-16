@@ -7,6 +7,7 @@ import root.timemanagementapp.database.model.Task;
 import root.timemanagementapp.database.repo.SprintRepository;
 import root.timemanagementapp.dto.SprintDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,12 +45,14 @@ public class SprintService {
         return save(sprint);
     }
 
-    public Sprint getActiveSprint() throws Exception {
+    public Sprint getActiveSprint()  {
         Optional<Sprint> optionalSprint = getAllSprints().stream().filter(Sprint::isActive).findFirst();
         if (optionalSprint.isPresent()) {
             return optionalSprint.get();
         } else {
-            throw new Exception("No active sprint");
+            Sprint sprint = new Sprint("Активный спринт (шаблон)");
+            sprint.setTasks(new ArrayList<>());
+            return save(sprint);
         }
     }
 

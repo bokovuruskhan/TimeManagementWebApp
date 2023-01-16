@@ -44,6 +44,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="legendModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-header border-bottom-0">
+                    <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+                    <h1 class="fw-bold mb-0 fs-2">Легенда</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="btn-group m-2" role="group">
+                        <button type="button" class="btn btn-primary">Название задачи</button>
+                        <button type="button" class="btn btn-dark">Запланированное время</button>
+                        <button type="button" class="btn btn-dark">Затраченное время</button>
+                    </div>
+                    <div class="m-2">
+                        <p>
+                            <i class="bi bi-cursor"></i> Наведите курсор на задачу для дополнительных опций
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div th:if="${currentUser.isMaster()}" class="modal fade" id="sprintSettingsModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -101,7 +124,7 @@
                 </button>
                 <button class="btn btn-sm btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#profileModal"
                         type="button"><i class="bi bi-person-badge"></i></button>
-                <button class="btn btn-sm btn-outline-success ms-2" type="button"><i class="bi bi-info-square"></i>
+                <button class="btn btn-sm btn-outline-success ms-2" data-bs-toggle="modal" data-bs-target="#legendModal" type="button"><i class="bi bi-info-square"></i>
                 </button>
                 <a href="/logout" class="btn btn-sm btn-outline-danger ms-2 me-4" type="button"><i
                         class="bi bi-x-lg"></i></a>
