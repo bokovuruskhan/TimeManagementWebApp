@@ -11,11 +11,17 @@
                         <input class="form-control mb-2" type="text" name="name" placeholder="Задача" required>
                         <input class="form-control mb-2" type="time" name="estimatedTime" placeholder="Оцененное время"
                                required>
-                        <select class="form-select form-control" name="highPriority" required>
+                        <select class="form-select form-control mb-2" name="highPriority" required>
                             <option value="true" selected>Высокий приоритет</option>
                             <option value="false">Низкий приоритет</option>
                         </select>
-                        <input name="userId" th:value="${currentUser.getId()}" hidden>
+                        <select th:if="${currentUser.isMaster()}" name="userId" class="form-select form-control"
+                                required>
+                            <option th:each="developer : ${developers}" th:value="${developer.getId()}"
+                                    th:text="${developer.getUsername()}">
+                            </option>
+                        </select>
+                        <input th:if="${currentUser.isDev()}" name="userId" th:value="${currentUser.getId()}" hidden>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn form-control btn-outline-dark">Добавить</button>
@@ -91,7 +97,8 @@
                             Перерасход по времени: 0
                         </p>
                         <div class="mb-2">
-                            <input id="finishCheckBox" class="form-check-input" type="checkbox" value="true" name="active" checked>
+                            <input id="finishCheckBox" class="form-check-input" type="checkbox" value="true"
+                                   name="active" checked>
                             <label class="form-check-label" for="finishCheckBox">
                                 Активный
                             </label>
@@ -124,7 +131,8 @@
                 </button>
                 <button class="btn btn-sm btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#profileModal"
                         type="button"><i class="bi bi-person-badge"></i></button>
-                <button class="btn btn-sm btn-outline-success ms-2" data-bs-toggle="modal" data-bs-target="#legendModal" type="button"><i class="bi bi-info-square"></i>
+                <button class="btn btn-sm btn-outline-success ms-2" data-bs-toggle="modal" data-bs-target="#legendModal"
+                        type="button"><i class="bi bi-info-square"></i>
                 </button>
                 <a href="/logout" class="btn btn-sm btn-outline-danger ms-2 me-4" type="button"><i
                         class="bi bi-x-lg"></i></a>

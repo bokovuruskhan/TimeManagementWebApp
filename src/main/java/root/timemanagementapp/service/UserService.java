@@ -10,11 +10,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import root.timemanagementapp.database.model.User;
 import root.timemanagementapp.database.repo.UserRepository;
+import root.timemanagementapp.dto.RoleNames;
 import root.timemanagementapp.dto.UserDto;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -39,6 +41,16 @@ public class UserService implements UserDetailsService {
     public User findUserById(Long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElse(new User());
+    }
+
+    public List<User> findAllDevelopers(){
+        return userRepository.findAll().stream().filter(User-> {
+            try {
+                return User.getRoles().contains(roleService.findByName(RoleNames.DEV_ROLE));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).collect(Collectors.toList());
     }
 
     public List<User> findAll() {
