@@ -1,0 +1,78 @@
+<div th:fragment="task_div">
+
+    <div class="modal fade modal-sheet py-5" tabindex="-1" role="dialog" th:id="'noteModal' + ${task.getId()}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <form onsubmit="addNodeToTask();return false" method="post">
+                    <input name="taskId" th:value="${task.getId()}" hidden>
+                    <div class="modal-header border-bottom-0">
+                        <h1 th:text="${task.getName()}" class="modal-title fs-5">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body py-0">
+                        <textarea class="form-control" name="note" placeholder="Заметка" rows="3"
+                                  th:text="${task.getNote()}"></textarea>
+                    </div>
+                    <div class="modal-footer flex-column border-top-0">
+                        <button type="submit" data-bs-dismiss="modal" aria-label="Close"
+                                class="btn btn-lg btn-primary w-100 mx-0 mb-2">Сохранить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:id="${task.getId()}" class="row task-status p-2 mb-4 rounded task"
+         th:classappend="${(task.isNormalStatus() ? 'task-status-normal' : '')
+     + (task.isPrimaryStatus() ? 'task-status-primary' : '')
+     + (task.isWarningStatus() ? 'task-status-warning' : '')
+     + (task.isDangerStatus() ? 'task-status-danger' : '')}">
+        <div class="col-md-8">
+            <h5 class="text-wrap" th:text="${task.getName()}">
+            </h5>
+        </div>
+        <div class="col-auto btn-group">
+            <button class="btn btn-sm btn-outline-dark"
+                    th:text="${task.getEstimatedTimeString()}">
+            </button>
+            <button class="btn btn-sm btn-outline-dark" th:id="'task'+${task.getId()}+'Timer'"
+                    th:text="${task.getElapsedTimeString()}">
+            </button>
+        </div>
+        <div class="col-auto btn-group task-buttons">
+            <button th:if="${!task.isCompleted()}" th:task-id="${task.getId()}" th:id="'task'+${task.getId()}+'StartButton'"
+                    class="btn btn-sm btn-outline-dark"
+                    th:onclick="startTaskTimer(this.getAttribute('task-id'));" type="button"><i
+                    class="bi bi-play"></i>
+            </button>
+            <button th:if="${!task.isCompleted()}" disabled th:task-id="${task.getId()}"
+                    th:id="'task'+${task.getId()}+'StopButton'" class="btn btn-sm btn-outline-dark"
+                    th:onclick="stopTaskTimer(this.getAttribute('task-id'));" type="button"><i
+                    class="bi bi-stop"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                    th:data-bs-target="'#noteModal' + ${task.getId()}" type="button"><i
+                    class="bi bi-sticky"></i>
+            </button>
+            <form th:if="${!task.isCompleted()}" class="m-0 p-0 btn btn-sm" onsubmit="changePriority();return false" method="post">
+                <input name="id" th:value="${task.getId()}" hidden>
+                <button class="btn btn-sm btn-outline-warning"
+                        type="submit"><i class="bi bi-arrow-down-up"></i>
+                </button>
+            </form>
+            <form class="m-0 p-0 btn btn-sm" onsubmit="deleteTask();return false" method="post">
+                <input name="id" th:value="${task.getId()}" hidden>
+                <button class="btn btn-sm btn-outline-danger"
+                        type="submit"><i class="bi bi-trash3"></i>
+                </button>
+            </form>
+            <form th:if="${!task.isCompleted()}" class="m-0 p-0 btn btn-sm" onsubmit="completeTask();return false" method="post">
+                <input name="id" th:value="${task.getId()}" hidden>
+                <button class="btn btn-sm btn-outline-success"
+                        type="submit"><i class="bi bi-check-square"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

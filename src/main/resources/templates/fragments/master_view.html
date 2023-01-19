@@ -1,0 +1,15 @@
+<div th:fragment="master_view">
+    <form action="/dev" method="get">
+        <div class="d-flex p-4 m-4 shadow">
+            <select class="w-75 form-select form-control" name="devId" required>
+                <option th:each="developer : ${developers}" th:value="${developer.getId()}"
+                        th:text="${developer.getUsername()}">
+                </option>
+            </select>
+            <button type="submit" class="w-25 btn btn-outline-dark ms-3">Показать доску разработчика</button>
+        </div>
+    </form>
+    <div th:if="${developer}">
+        <div th:insert="fragments/dev_view :: dev_view"></div>
+    </div>
+</div>
